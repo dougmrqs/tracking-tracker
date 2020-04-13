@@ -17,17 +17,15 @@ browser = webdriver.Chrome(chrome_options=options)
 
 tracking_codes = []
 row = 1
-time_end = time.time()+500
+time_end = time.time()+120
 
 db_dir = './db/'
-dbs = listdir(db_dir)
-crawl_dbs = []
-for item in dbs:
-    if 'crawl_' in item:
-        crawl_dbs.append(item)
-filename = db_dir+crawl_dbs[-1]
+filename = db_dir+'crawl_main.json'
 with open(filename, 'r') as openfile: 
     db = json.load(openfile)
+
+with open(db_dir+'crawl_bkp.json', "w") as outfile:
+    json.dump(db, outfile)
 
 code_list = []
 for doc in db:
@@ -43,6 +41,10 @@ while True:
                 "included": time.strftime("%d/%m/%Y %H:%M:%S")
             }
             tracking_codes.append(code)
+            db += code
+            with open(filename, "w") as outfile: 
+                json.dump(db, outfile)
+            print(f"{len(tracking_codes)} new tracking codes so long...")
         row+=1
     except:
         os.system('cls')
@@ -50,16 +52,9 @@ while True:
         time.sleep(10)
         row = 1
         browser.get("https://linketrack.com/?utm_source=home")
+
     if time.time() > time_end:
         break
 
 print(f"\nDone! Acquired {len(tracking_codes)} new codes.\n")
 browser.quit()
-
-## Save DB with the same name as the open one
-# filename = db_dir+'crawl_'+str(int(time.time()))+'.json'
-with open('./db/crawl_bkp.json', "w") as outfile:
-    json.dump(db, outfile)
-db += tracking_codes
-with open(filename, "w") as outfile: 
-    json.dump(db, outfile)
