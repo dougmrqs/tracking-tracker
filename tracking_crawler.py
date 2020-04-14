@@ -17,7 +17,7 @@ browser = webdriver.Chrome(chrome_options=options)
 
 tracking_codes = []
 row = 1
-time_end = time.time()+120
+time_end = time.time()+600
 
 db_dir = './db/'
 filename = db_dir+'crawl_main.json'
@@ -41,13 +41,13 @@ while True:
                 "included": time.strftime("%d/%m/%Y %H:%M:%S")
             }
             tracking_codes.append(code)
-            db += code
+            db.append(code)
             with open(filename, "w") as outfile: 
                 json.dump(db, outfile)
-            print(f"{len(tracking_codes)} new tracking codes so long...")
         row+=1
     except:
         os.system('cls')
+        print(f"{len(tracking_codes)} new tracking codes so long...")
         print(f'Time left: {int(time_end-time.time())} seconds')
         time.sleep(10)
         row = 1

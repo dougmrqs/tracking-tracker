@@ -46,3 +46,16 @@ def check_code(code):
         if c == 10:
             c = 0
     return int(check_digit) == int(c)
+
+def crack_code(code):
+    prefix = code[:2]
+    origin = code[-2:]
+    first = code[2]
+    check = code[-3]
+    probable_codes = []
+    for i in range(0, 9999999):
+        try_code = str(i).zfill(7)
+        asbld_code = prefix+first+try_code+check+origin
+        if check_code(asbld_code):
+            probable_codes.append(asbld_code)
+    return probable_codes
