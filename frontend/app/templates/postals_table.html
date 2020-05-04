@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Tabela de Servços Postais</title>
+
+<!-- Custom styles for this page -->
+<link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<h1 class="h3 mb-2 text-gray-800">Tabela de serviços postais</h1>
+<p class="mb-4">A lista abaixo pode servir de referência para entender o tipo 
+    de serviço contratado para despacho do pacote. Cada despachante pode ter 
+    um significado diferente e os padrões utilizados abaixo são os praticados 
+    pelos Correios brasileiros. <a href="https://en.wikipedia.org/wiki/S10_(UPU_standard)" target='_blank'>Mais informações aqui</a>.
+</p>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Siglas dos serviços postais</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Tipo de Serviço</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Código</th>
+                        <th>Tipo de Serviço</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for code, service in db.items() %}
+
+                    <tr>
+                        <td>{{ code }}</td>
+                        <td>{{ service }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<!-- Page level plugins -->
+<script src="../static/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="../static/js/demo/datatables-demo.js"></script>
+{% endblock %}

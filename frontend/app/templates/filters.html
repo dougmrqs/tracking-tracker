@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Tracking Tracker - HOME</title>
+{% endblock %}
+
+{% block content %}
+
+
+<h2 class='mb-3'>Parâmetros de filtragem</h2>
+
+<form action="/">
+    <p>Data de Postagem</p>
+    <label for="start">Início:</label>
+    <input type="date" id="start" name="start">
+<span class="ml-3"></span>
+    <label for="end">Fim:</label>
+    <input type="date" id="end" name="end">
+    <input type="submit" value="Buscar!">
+</form>
+
+<!-- <h1>Sign In</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}
+    </p>
+    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p>{{ form.submit() }}</p>
+</form> -->
+
+
+<!-- <a href="/" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+    <i class="fas fa-download fa-sm text-white-50"></i> Download dos selecionados</a> -->
+
+{% endblock %}
